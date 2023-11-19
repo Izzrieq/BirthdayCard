@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Birthday Card</title>
+    <!-- Google Font-->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Stylesheet -->
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: "Poppins", sans-serif;
+      }
+      #bg-video {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        min-width: 100%;
+        min-height: 100%;
+        width: auto;
+        height: auto;
+        z-index: -1;
+        transform: translate(-50%, -50%);
+        filter: brightness(60%);
+      }
+      .card {
+        width: 640px;
+        height: 400px;
+        position: absolute;
+        margin: auto;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        -webkit-perspective: 1200px;
+        perspective: 1200px;
+        transition: 1s;
+      }
+      .card:hover {
+        transform: rotate(-5deg);
+      }
+      .card:hover .outside {
+        transform: rotateY(-130deg);
+      }
+      .outside,
+      .inside {
+        height: 100%;
+        width: 50%;
+        position: absolute;
+        left: 50.1%;
+      }
+      .inside {
+        background: linear-gradient(to right, #e7e7e7, #ffffff 30%);
+        line-height: 3;
+        padding: 0 20px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        left: 50%;
+      }
+      .outside {
+        -webkit-transform-style: preserve-3d;
+        transform-style: preserve-3d;
+        z-index: 1;
+        transform-origin: left;
+        transition: 2s;
+        cursor: pointer;
+      }
+      .front,
+      .back {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        transform: rotateX(0deg);
+      }
+      .front {
+        background-color: #ffffff;
+      }
+      .back {
+        transform: rotateY(180deg);
+        background: linear-gradient(to left, #e7e7e7, #ffffff 30%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .back img {
+        max-width: calc(100% - 20px);
+        max-height: calc(100% - 20px); 
+      }
+      .cake {
+        width: 100%;
+        position: absolute;
+        bottom: 30px;
+      }
+      .top-layer,
+      .middle-layer,
+      .bottom-layer {
+        height: 80px;
+        width: 240px;
+        background-repeat: repeat;
+        background-size: 60px 100px;
+        background-position: 28px 0;
+        background-image: linear-gradient(
+            transparent 50px,
+            #fedbab 50px,
+            #fedbab 60px,
+            transparent 60px
+          ),
+          radial-gradient(circle at 30px 5px, #994c10 30px, #fcbf29 31px);
+        border-radius: 10px 10px 0 0;
+        position: relative;
+        margin: auto;
+      }
+      .middle-layer {
+        transform: scale(0.85);
+        top: 6px;
+      }
+      .top-layer {
+        transform: scale(0.7);
+        top: 26px;
+      }
+      .candle {
+        height: 45px;
+        width: 15px;
+        background: repeating-linear-gradient(
+          45deg,
+          #fd3018 0,
+          #fd3018 5px,
+          #ffa89e 5px,
+          #ffa89e 10px
+        );
+        position: absolute;
+        margin: auto;
+        left: 0;
+        right: 0;
+        bottom: 202px;
+      }
+      .candle:before {
+        content: "";
+        position: absolute;
+        height: 16px;
+        width: 16px;
+        background-color: #ffa500;
+        border-radius: 0 50% 50% 50%;
+        bottom: 48px;
+        transform: rotate(45deg);
+        left: -1px;
+      }
+      .outside p {
+        font-size: 23px;
+        text-transform: uppercase;
+        margin-top: 30px;
+        text-align: center;
+        letter-spacing: 6px;
+        color: #000046;
+      }
+      .inside h1 {
+        font-size: 120px;
+        line-height: 120px;
+      }
+      .inside p {
+        font-size: 20px; 
+        line-height: 20px; 
+      }
+      .love-text {
+        width: 200px;
+        border-radius: 10px;
+        padding: none;
+        display: none;
+        position: absolute;
+        font-size: 24px;
+        color: rgb(255, 255, 255);
+        background-color: rgb(6, 157, 228);
+      }
+      @media (max-width: 428px) {
+        .card {
+          width: 90%; 
+          height: 300px; 
+        }
+        .cake {
+          bottom: 15px; 
+        }
+        .top-layer,
+        .middle-layer,
+        .bottom-layer {
+          height: 50px; 
+          width: 150px; 
+        }
+        .candle {
+          height: 30px; 
+          width: 5px; 
+          bottom: 115px; 
+        }
+        .candle:before {
+          content: "";
+          position: absolute;
+          height: 16px;
+          width: 16px;
+          background-color: #ffa500;
+          border-radius: 0 50% 50% 50%;
+          bottom: 33px;
+          transform: rotate(45deg);
+          left: -5px;
+        }
+        .inside {
+          padding: 10px; 
+        }
+        .outside p {
+          font-size: 16px; 
+          margin-top: 15px; 
+        }
+        .inside h1 {
+          font-size: 60px; 
+          line-height: 60px; 
+        }
+        .inside p {
+          font-size: 14px; 
+          line-height: 16px; 
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <video autoplay muted loop id="bg-video">
+    <source src="Blooming Flower ' Animation '.mp4" type="video/mp4">
+  </video>
+    <div class="card-container">
+      <div class="card">
+        <div class="outside">
+          <div class="front">
+            <p>Happy Birthday</p>
+            <div class="cake">
+              <div class="top-layer"></div>
+              <div class="middle-layer"></div>
+              <div class="bottom-layer"></div>
+              <div class="candle"></div>
+            </div>
+          </div>
+          <div class="back">
+            <img src="photo_6255783196096576354_y.jpg" alt="">
+          </div>
+        </div>
+        <div class="inside">
+          <p>Happy Birthday, my baby boo! ♡ Your presence fills my world with boundless joy. Wishing you a day as beautiful and vibrant as you are. Here's to more love, laughter, and unforgettable moments together! 🎉🎂💖</p>
+          <h1 id="loveTrigger">&#127873;</h1>
+          <p>click gift</p>
+
+          <div class="love-text" id="loveText">I love you♡♡♡!</div>
+        </div>
+      </div>
+    </div>
+    <script>
+      const loveTrigger = document.getElementById('loveTrigger');
+    const loveText = document.getElementById('loveText');
+    const cardContainer = document.querySelector('.card-container');
+
+    loveTrigger.addEventListener('click', () => {
+      const cardRect = cardContainer.getBoundingClientRect();
+      const randomX = Math.random() * (cardRect.width - 400) + cardRect.left;
+      const randomY = Math.random() * (cardRect.height - 50) + cardRect.top;
+
+      loveText.style.left = `${randomX}px`;
+      loveText.style.top = `${randomY}px`;
+      loveText.style.display = 'block';
+
+      setTimeout(() => {
+        loveText.style.display = 'none';
+      }, 2000); 
+    });
+    </script>
+  </body>
+</html>
